@@ -8,16 +8,20 @@ describe('acceptEULA', function() {
   this.timeout(30000)
   let driver
   let vars
-  beforeEach(async function() {
+  before(async function() {
     driver = await new Builder().forBrowser('chrome').usingServer(globals.webDriverUrl).build()
     vars = {}
   })
-  afterEach(async function() {
+  after(async function() {
     await driver.quit();
   })
-  it('acceptEULA', async function() {
+  it('launch app', async function() {
     await driver.get(globals.appRoute)
+  })
+  it('accept EULA', async function() {
     await driver.findElement(By.css(".pf-m-display-lg")).click()
+  })
+  it('assert we land on profile page', async function() {
     assert(await driver.getTitle() == "COVIDsafe | Profile")
   })
 })
