@@ -1,4 +1,4 @@
-# NC VAX TRAX - UI Testing Framework
+# NC COVIDSafe - UI Testing Framework
 
 ## Technology Overview
 
