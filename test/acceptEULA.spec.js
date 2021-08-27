@@ -4,24 +4,24 @@ const globals = require('../globals.js');
 const { Builder, By, Key, until } = require('selenium-webdriver')
 const assert = require('assert')
 
-describe('acceptEULA', function() {
+describe('Accept EULA and assert navigation to Profile', function() {
   this.timeout(30000)
   let driver
   let vars
   before(async function() {
-    driver = await new Builder().forBrowser('chrome').usingServer(globals.webDriverUrl).build()
+    driver = await new Builder().forBrowser(globals.browser).usingServer(globals.webDriverUrl).build()
     vars = {}
   })
   after(async function() {
     await driver.quit();
   })
-  it('launch app', async function() {
+  it('Launch app', async function() {
     await driver.get(globals.appRoute)
   })
-  it('accept EULA', async function() {
+  it('Accept the EULA', async function() {
     await driver.findElement(By.css(".pf-m-display-lg")).click()
   })
-  it('assert we land on profile page', async function() {
+  it('Assert we land on profile page', async function() {
     assert(await driver.getTitle() == "COVIDsafe | Profile")
   })
 })

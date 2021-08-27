@@ -4,20 +4,24 @@ const globals = require('../globals.js');
 const { Builder, By, Key, until } = require('selenium-webdriver')
 const assert = require('assert')
 
-describe('contactLink', function() {
+describe('Test Contact Link', function() {
   this.timeout(30000)
   let driver
   let vars
-  beforeEach(async function() {
-    driver = await new Builder().forBrowser('chrome').usingServer(globals.webDriverUrl).build()
+  before(async function() {
+    driver = await new Builder().forBrowser(globals.browser).usingServer(globals.webDriverUrl).build()
     vars = {}
   })
-  afterEach(async function() {
+  after(async function() {
     await driver.quit();
   })
-  it('contactLink', async function() {
+  it('Launch app', async function() {
     await driver.get(globals.appRoute)
+  })
+  it('Click contact link', async function() {
     await driver.findElement(By.css(".pf-c-nav__item:nth-child(1) span")).click()
+  })
+  it('Assert we landed on Contact page', async function() {
     assert(await driver.getTitle() == "COVIDsafe | Contact")
   })
 })
