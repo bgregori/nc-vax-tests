@@ -10,13 +10,13 @@
 ```
 git clone https://github.com/bgregori/nc-vax-tests.git
 cd nc-vax-tests
-./prep_env.sh
-./run_tests.sh
+./test_resources/prep_env.sh
+./test_resources/run_tests.sh
 ```
 
 ### Environment Variables
 
-Environment Variables that are required. They are set up for at the top of the `./run_tests.sh` script in project base directory. 
+Environment Variables that are required: 
 
 - `APP_ROUTE`: `Application Under Test Base Url`
 - `WEB_DRIVER_URL`: `Selenium Grid URL`
@@ -36,14 +36,8 @@ Leverage the Selenium IDE browser extension as a base for you tests. This can be
 In order to create a test:
 1. Record a script with your desired test case.
 2. Right click on the name of the test and select "export". For this project export as `JavaScript - Mocha`. 
-3. Add the following to the top of the file exported: `const globals = require('../globals.js');`
-4. Replace the URL's and browser capability in the generated test exported from IDE with the following values: 
-```
-globals.webDriverUrl
-globals.appRoute
-globals.browser
-```
-5. Save your file to the `./test` directory
+3. Save your file to the `./test` directory
+4. Run the `./test_resources/fix_export.sh` script against the exported file
 
 ## Allure 
 
@@ -53,7 +47,8 @@ The output of running the Mocha tests is a raw data file for Allure. From this o
 
 ### Adding Allure Test and Steps to use case
 
-- Change `beforEeach` and `afterEach` functions in generated script to `before` and `after`.
+The export will put all test steps into a single test case. To provide more granular reporting we want to break these up into multiple test cases.
+
 - `describe` function should wrap entire test case
 - `it` function should label each step
 
