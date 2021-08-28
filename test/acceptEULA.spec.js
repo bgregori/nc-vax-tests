@@ -22,6 +22,6 @@ describe('Accept EULA and assert navigation to Profile', function() {
     await driver.findElement(By.css(".pf-m-display-lg")).click()
   })
   it('Assert we land on profile page', async function() {
-    assert(await driver.getTitle() == "COVIDsafe | Profile")
+    assert(await driver.getCurrentUrl() == globals.appRoute + "/profile")
   })
 })

@@ -22,6 +22,6 @@ describe('Test Contact Link', function() {
     await driver.findElement(By.css(".pf-c-nav__item:nth-child(1) span")).click()
   })
   it('Assert we landed on Contact page', async function() {
-    assert(await driver.getTitle() == "COVIDsafe | Contact")
+    assert(await driver.getCurrentUrl() == globals.appRoute + "/contact")
   })
 })
